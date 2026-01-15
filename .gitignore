@@ -1,0 +1,75 @@
+# Arquivos de ambiente e credenciais
+.env
+*.log
+
+# Pastas de saída com documentos gerados
+src/output/gerador/bo/
+src/output/gerador/cnh/
+src/output/gerador/contract/
+src/output/gerador/crlv/
+src/output/gerador/document/
+src/output/gerador/done/
+
+# Manter apenas as pastas vazias
+!src/output/gerador/bo/.gitkeep
+!src/output/gerador/cnh/.gitkeep
+!src/output/gerador/contract/.gitkeep
+!src/output/gerador/crlv/.gitkeep
+!src/output/gerador/document/.gitkeep
+!src/output/gerador/done/.gitkeep
+
+# Pasta de documentos enviados
+src/enviadas/
+
+# Arquivos Excel com dados sensíveis (opcional - descomente se necessário)
+# src/utils/*.xlsx
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+venv/
+ENV/
+env/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Testes
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Arquivos temporários
+*.tmp
+*.bak
+*.old
+temp_*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
