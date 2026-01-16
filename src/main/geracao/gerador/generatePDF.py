@@ -420,7 +420,7 @@ def main():
         elif occurrence_type == 3:  # FURTO
             texts.append(
                 f'No dia {occurrence_dates[i]} e hora {occurrence_hours[i]}, o locatario {user_name}, portador do RG {data_user_rg[i]}, '
-                f'notificou através do aplicativo que a motocicleta de modelo {model} e placa {plate}, foi comunicada como roubada '
+                f'notificou através do aplicativo que a motocicleta de modelo {model} e placa {plate}, foi comunicada como furtada '
                 f'no endereço {data_address[i]}. Apos o incidente, o GPS do veiculo deixou de transmitir sinais. O gps do veiculo '
                 f'deixou de transmitir sinais. O cliente entrou em contato inicialmente pelo aplicativo para relatar o ocorrido. '
                 f'Apesar das dilegências, realizadas para a recuperação do veiculo, não foi possivel alcançar êxito nas operações. '
