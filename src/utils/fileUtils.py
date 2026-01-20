@@ -26,7 +26,23 @@ def searchExcel(column_name, excelPath=None):
     if not excelPath or not os.path.exists(excelPath):
         raise ValueError(f"Caminho do arquivo Excel inválido ou não encontrado: {excelPath}")
 
-    df = pd.read_excel(excelPath, sheet_name=os.getenv('excelPage', 0))
+    excel_page_env = os.getenv('excelPage')
+    if excel_page_env is None:
+        sheet_arg = 0
+    else:
+        try:
+            sheet_arg = int(excel_page_env)
+        except Exception:
+            sheet_arg = excel_page_env
+
+    try:
+        df = pd.read_excel(excelPath, sheet_name=sheet_arg)
+    except ValueError as e:
+        # se a sheet nomeada não existir, tentar a primeira aba (índice 0)
+        try:
+            df = pd.read_excel(excelPath, sheet_name=0)
+        except Exception:
+            raise
     if column_name not in df.columns:
         return []
     # limpa valores NaN e converte para string
