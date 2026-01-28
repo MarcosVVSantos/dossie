@@ -118,10 +118,24 @@ def main():
     rentalIdList = searchExcel('dataUserRentalId')
     userIdList = searchExcel('dataUserId')
     plateList = searchExcel('dataVehiclePlate')  # Adicionado: buscar placas
+    occurrenceTypeList = searchExcel('dataOccurrenceType')  # Buscar tipo de ocorrência
 
-    # Criar queue com (userId, rentalId, plate)
-    queue = list(zip(userIdList, rentalIdList, plateList))
-    retries = {f"{uid}_{rid}": 0 for uid, rid in zip(userIdList, rentalIdList)}
+    # Criar queue com (userId, rentalId, plate) e filtrar tipo 12 (não precisa de contrato)
+    queue = []
+    for uid, rid, plate, occ_type in zip(userIdList, rentalIdList, plateList, occurrenceTypeList):
+        try:
+            occ_type_int = int(occ_type) if occ_type not in (None, '-', '') else 0
+        except (ValueError, TypeError):
+            occ_type_int = 0
+        
+        # Pular tipo 12 (VEICULO ENCONTRADO SEM LOCACAO) - não precisa de contrato
+        if occ_type_int == 12:
+            print(f"⏭️  Pulando contrato para tipo 12 (VEÍCULO ENCONTRADO SEM LOCAÇÃO) - Placa: {plate}")
+            continue
+        
+        queue.append((uid, rid, plate))
+    
+    retries = {f"{uid}_{rid}": 0 for uid, rid, _, _ in zip(userIdList, rentalIdList, plateList, occurrenceTypeList)}
 
     # Limpa pasta
     limpar_pasta_contract()

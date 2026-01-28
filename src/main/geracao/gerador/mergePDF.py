@@ -260,7 +260,7 @@ def merge_pdfs():
         """Retorna lista de documentos obrigatórios baseado no tipo"""
         if tipo in [4, 10]:
             return ["DOCUMENTO_GERADO", "CNH", "CRLV"]
-        elif tipo == 11:
+        elif tipo in [11, 12]:
             return ["DOCUMENTO_GERADO", "CRLV"]
         else:
             return ["DOCUMENTO_GERADO", "CNH", "CRLV", "CONTRATO"]
@@ -276,7 +276,7 @@ def merge_pdfs():
                 documentos["CNH"], 
                 documentos["CRLV"]
             ]
-        elif tipo == 11:
+        elif tipo in [11, 12]:
             ordem_base = [
                 documentos["DOCUMENTO_GERADO"],
                 documentos["CRLV"]
@@ -345,7 +345,8 @@ def merge_pdfs():
         8: "BAIXA_DE_BOLETIM_DE_OCORRENCIA_VEICULO_APREENDIDO",
         9: "BAIXA_DE_BOLETIM_DE_OCORRENCIA_VEICULO_APREENDIDO_BO_ATIVO",
         10: "ALTERACAO_DE_BOLETIM_DE_OCORRENCIA_ROUBO_FURTO",
-        11: "NÃO CRIMINAL - OUTROS NÃO CRIMINAL"
+        11: "NAO CRIMINAL - OUTROS NAO CRIMINAL",
+        12: "BAIXA_DE_BOLETIM_DE_OCORRENCIA_VEICULO_ENCONTRADO_SEM_LOCACAO"
     }
     
     # Agrupar e processar conjuntos por tipo
@@ -427,9 +428,10 @@ def merge_pdfs():
     print(f"   1. 📄 Documento Gerado (document)")
     print(f"   2. 🪪 CNH (cnh)") 
     print(f"   3. 🚗 CRLV (crlv)")
-    print(f"   4. 📝 Contrato (contract) - EXCETO para Tipos 4 e 10")
+    print(f"   4. 📝 Contrato (contract) - EXCETO para Tipos 4, 10, 11 e 12")
     print(f"   5. 📋 BO (bo) - APENAS para Tipos 6, 7, 8, 9 e 10")
     print(f"   ⚠️  NOTA: Para Tipos 4 (VIOLAÇÃO) e 10 (ALTERAÇÃO ROUBO/FURTO), o CONTRATO não é incluído")
+    print(f"   📋 NOTA: Para Tipo 11 e 12, CONTRATO não é incluído - apenas DOCUMENTO e CRLV")
     print(f"   📋 NOTA: Para Tipos 6, 7, 8, 9 e 10, o BO é incluído como último documento")
 
 if __name__ == "__main__":

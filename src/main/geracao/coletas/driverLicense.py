@@ -398,6 +398,18 @@ def processar_boletins():
         try:
             placa = str(row.get('dataVehiclePlate', '')).strip()
             raw_user = row.get('dataUserId', None)
+            occurrence_type = row.get('dataOccurrenceType', None)
+            
+            # Converter tipo de ocorrência
+            try:
+                occ_type_int = int(occurrence_type) if occurrence_type not in (None, '-', '') else 0
+            except (ValueError, TypeError):
+                occ_type_int = 0
+            
+            # Pular tipo 12 (VEICULO ENCONTRADO SEM LOCACAO) - não precisa de CNH
+            if occ_type_int == 12:
+                print(f"⏭️  Pulando CNH para tipo 12 (VEÍCULO ENCONTRADO SEM LOCAÇÃO) - Placa: {placa}")
+                continue
 
             # valida user_id
             if pd.isna(raw_user) or str(raw_user).strip() in ('', '-', 'NaN', 'None'):

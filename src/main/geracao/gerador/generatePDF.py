@@ -516,7 +516,14 @@ def main():
                 f' precisas acerca da localização do referido componente.'
             )
 
-            
+        elif occurrence_type == 12:  # VEICULO ENCONTRADO SEM LOCACAO
+            texts.append(
+                f'No dia {occurrence_dates[i]} e hora {occurrence_hours[i]}, o rastreador do veiculo voltou a emitir sinais com a sua localização nas coordenadas: ({row["dataTrackingGeolocation"]}). '
+                f'Deste modo, para averiguação dos sinais transmitidos foi enviado um prestador ao local. O motorista {row.get("dataOccurrenceBranchDriverName", "Motorista não informado")} foi designado  '
+                f'para a tarefa. Ao chegar ao local, confirmou a presença do veiculo da placa: {plate.upper()}, e chassi: {row.get("dataVehicleChassis", "Chassi não informado").upper()}, '
+                f'abandonado e procedeu com a sua recolha. O veiculo foi encaminhado para o pátio da empresa para as devidas providências legais e contato.'
+            )
+
         else:
             texts.append(
                 f"Ocorrência registrada em {occurrence_dates[i]} às {occurrence_hours[i]} envolvendo o veículo "
@@ -546,7 +553,8 @@ def main():
             8: "BAIXA DE BOLETIM DE OCORRÊNCIA - VEÍCULO APREENDIDO",
             9: "BAIXA DE BOLETIM DE OCORRÊNCIA - VEÍCULO APREENDIDO - BO ATIVO",
             10: "ALTERAÇÂO DE BOLETIM DE OCORRÊNCIA - ROUBO/FURTO",
-            11: "NÃO CRIMINAL - OUTROS NÃO CRIMINAL"
+            11: "NÃO CRIMINAL - OUTROS NÃO CRIMINAL",
+            12: "BAIXA DE BOLETIM DE OCORRÊNCIA - VEÍCULO ENCONTRADO SEM LOCAÇÃO"
         }
         
         doc_type_name = type_names.get(occurrence_type, "OCORRÊNCIA")
